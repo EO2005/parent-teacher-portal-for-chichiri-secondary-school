@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Add Subject</title>
+    <link rel="stylesheet" href="../../../Styles/Style.css">
+    <script src="../../../Libraries/Javascript/sweetalert2.all.min.js"></script>
+</head>
+<body class="Dashboard">
+    <header>
+        <img src="../../../../../Assets/Images/chichiri.png" alt="">
+        <h1>Admin | Add Class</h1>
+    </header>
+    <nav>
+        <a href="../../Dashboard.php"><img src="../../../../../Assets/Images/Naviagtion/Home.png" alt="">Dashboard</a>
+        <a href="../../Manage/Manage.php"><img src="../../../../../Assets/Images/Naviagtion/Manage.png" alt="">Manage</a>
+        <a href="../../Calendar/calendar.html"><img src="../../../../../Assets/Images/Naviagtion/Calendar.png" alt="">Calendar</a>
+        <a href="../../../Login.html">Logout</a>
+    </nav>
+    <div class="form">
+            <h1>Add Subject</h1>
+        <br>
+        <form action="AddSubject.php" method="post">
+            <input type="text" name="subject_name" id="" placeholder="Subject Name">
+            <br>
+            <br>
+            <a href="viewSubject.php" class="btn-success">Back</a>
+            <br>
+            <br>
+            <input type="submit" value="Add Subject">
+        </form>
+    </div>
+</body>
+</html>

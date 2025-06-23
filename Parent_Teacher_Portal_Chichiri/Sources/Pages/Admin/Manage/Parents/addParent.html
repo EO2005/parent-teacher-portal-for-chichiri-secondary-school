@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Add Parent</title>
+    <link rel="stylesheet" href="../../../Styles/Style.css">
+    <script src="../../../Libraries/Javascript/sweetalert2.all.min.js"></script>
+</head>
+<body class="Dashboard">
+    <header>
+        <img src="../../../../../Assets/Images/chichiri.png" alt="">
+        <h1>Admin | Manage Parents</h1>
+    </header>
+        <nav>
+        <a href="../../Dashboard.php"><img src="../../../../../Assets/Images/Naviagtion/Home.png" alt="">Dashboard</a>
+        <a href="../Manage.php"><img src="../../../../../Assets/Images/Naviagtion/Manage.png" alt="">Manage</a>
+        <a href="../"><img src="../../../../../Assets/Images/Naviagtion/Calendar.png" alt="">Calendar</a>
+        <a href="../../../Login.html">Logout</a>
+    </nav>
+        <div class="form">
+        <form action="AddParent.php" method="post">
+            <h1>Add Parent</h1>
+            <br>
+            <input type="text" name="parent_id" id="" placeholder="Parent ID" required>
+            <input type="text" name="first_name" id="" placeholder="First Name" required>
+            <br>
+            <input type="text" name="last_name" id="" placeholder="Last Name" required>
+            <input type="text" name="email_address" id="" placeholder="Email Address" required>
+            <br>
+            <input type="text" name="address" id="" placeholder="Home Address" required>
+            <input type="text" name="phone_number" placeholder="Phone Number" required>
+            <br>
+            <input type="password" name="password" placeholder="Password" required>
+            <br>
+            <br>
+            <a href="viewParents.php" class="btn-back">Back</a>
+            <br>
+            <br>
+            <input type="submit" value="Add Parents">
+        </form>
+        </div>
+</body>
+</html>

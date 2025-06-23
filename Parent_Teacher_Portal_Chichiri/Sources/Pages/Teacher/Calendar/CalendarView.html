@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher | Event Scheduler</title>
+    <link rel="stylesheet" href="../../Styles/Style.css">
+    <script src="../../../../Libraries/Javascript/sweetalert2.all.min.js"></script>
+    <script src="../../../../Libraries/Javascript/fullcalendar-6.1.9/dist/index.global.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          var calendarEl = document.getElementById('calendar');
+          var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            height: 650,
+            events: 'fetchEvents.php',
+            eventDisplay: 'block',
+      
+            selectable: true,
+            select: async function(start, end, allday){
+              const {value: formValues} = await Swal.fire({
+                title: 'Add Event',
+                html: 
+                '<input id="swalEvtTitle" class="swal2-input" placeholder="Enter Title">'+
+                '<textarea id="swalEvtDesc" class="swal2-input" placeholder="Enter Description"></textarea>',
+                focusConfirm: false,
+                preConfirm: () => {
+                  return[
+                    document.getElementById("swalEvtTitle").value,
+                    document.getElementById("swalEvtDesc").value,
+                  ]
+                }
+              });
+              if(formValues){
+                fetch("HandleEvents.php", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ request_type: 'addEvent', start:start.startStr, end:start.endStr, event_data: formValues}),
+                })
+                .then(response => response.json())
+                .then(data => {
+                  if(data.status == 1){
+                    Swal.fire('Event Added', '', 'Success');
+                  }
+                  else{
+                    Swal.fire(data.error, '', 'error');
+                  }
+                  calendar.refetchEvents();
+                })
+                .catch(console.error);
+              }
+            },
+      
+            eventClick: function(info){
+              info.jsEvent.preventDefault();
+              info.el.style.borderColor = "green";
+      
+              Swal.fire({
+                title: info.event.title,
+                icon: 'info',
+                html: '<p>'+ info.event.extendedProps.description +'</p>',
+                showCloseButton: true,
+                showCancelButton: true,
+                cancelButtonText: "Close",
+                confirmButtonText: "Delete Event",
+              }). then((result) => {
+                if (result.isConfirmed) {
+                  fetch("HandleEvents.php", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({request_type: 'deleteEvent', event_id: info.event.id}),
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                  if(data.status == 1){
+                    Swal.fire('Deleted!', data.msg, 'success');
+                  }
+                  else{
+                    Swal.fire(data.error, '', 'error');
+                  }
+                    calendar.refetchEvents();
+                  })
+                  .catch(console.error); 
+                }
+                else{
+                  Swal.close();
+                }
+              });
+            }
+          });
+          calendar.render();
+        });
+      </script>
+      
+</head>
+<script src="../../../../Libraries/Javascript/sweetalert2.all.min.js"></script>
+<body class="Dashboard">
+    <header>
+      <img src="../../../../Assets/Images/chichiri.png" alt="">
+      <h1>Teacher | Calendar</h1>
+    </header>
+    <nav class="nav">
+      <button onclick="Swal.fire('User Guide Teacher \n Calendar', 'In the calendar view, click on any date that doesnt have text and then enter the field and then click on add event.\n If you want to delete the data then click on a date that has a date with fields and it will show you a view, click delete date and it will be deleted', 'info')"><img src="../../../../Assets/Images/info.png" alt=""></button>
+      <a href="../Dashboard.php"><img src="../../../../Assets/Images/Naviagtion/Home.png" alt="">Dashboard</a>
+      <a href="CalendarView.html"><img src="../../../../Assets/Images/Naviagtion/Calendar.png" alt="">Calendar</a>
+      <a href="../Attendance/TakingAttendance.php"><img src="../../../../Assets/Images/Naviagtion/Manage.png" alt="">Attendance</a>
+      <a href="../Grading/GradeTracking_Classes.php"><img src="../../../../Assets/Images/Naviagtion/Grading.png" alt="">Grading</a>
+      <a href="../Generation/GenerationOfStudentProgress.php"><img src="../../../../Assets/Images/Naviagtion/Report.png" alt="">Generation</a>
+      <a href="../Messaging/message.php"><img src="../../../../Assets/Images/Naviagtion/Message.png" alt="">Messaging</a>
+      <a href="../../Login.html">Logout</a>
+    </nav>
+    <br>
+    <h1>Events</h1>
+    <br>
+    <div id='calendar'>
+        
+    </div>
+</body>
+</html>

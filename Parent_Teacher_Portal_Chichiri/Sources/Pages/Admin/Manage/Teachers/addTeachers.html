@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Add Teacher</title>
+    <link rel="stylesheet" href="../../../Styles/Style.css">
+    <script src="../../../../../Libraries/Javascript/sweetalert2.all.min.js"></script>
+</head>
+<body class="Dashboard">
+    <header>
+        <img src="../../../../../Assets/Images/chichiri.png" alt="">
+        <h1>Admin | Manage Teachers</h1>
+    </header>
+    <nav>
+        <button onclick="Swal.fire('User Guide Admin Manage Teacher', 'This is the add teachers, enter in the fields', 'info')"><img src="../../../../../Assets/Images/info.png" alt=""></button>
+        <a href="../../Dashboard.php"><img src="../../../../../Assets/Images/Naviagtion/Home.png" alt="">Dashboard</a>
+        <a href="../Manage.php"><img src="../../../../../Assets/Images/Naviagtion/Manage.png" alt="">Manage</a>
+        <a href="../"><img src="../../../../../Assets/Images/Naviagtion/Calendar.png" alt="">Calendar</a>
+        <a href="../../../Login.html">Logout</a>
+    </nav>
+        <div class="form">
+            <h1>Add Teacher</h1>
+            <br>
+            <form action="AddTeachers.php" method="post">
+                <input type="text" name="teacher_id" id="" placeholder="Teacher ID">
+                <input type="password" name="password" id="" placeholder="Password">
+                <br>
+                <input type="text" name="first_name" id="" placeholder="First Name">
+                <input type="text" name="last_name" id="" placeholder="Last Name">
+                <br>
+                <label for="gender">Gender:</label>
+                <select name="gender" id="gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+                <br>
+                <br>
+                <a href="viewTeachers.php" class="btn-success">Back</a>
+                <br>
+                <br>
+                <input type="submit" value="Add Teacher">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
